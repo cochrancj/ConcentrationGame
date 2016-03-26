@@ -13,11 +13,13 @@ Build two arrays of 25 tiles each (2 identical arrays) to store the tiles that w
 
 Use Math.floor & Math.random to randomize tiles in each array.
 
-Populate board with the randomly selected tiles (class: face down).
+Populate board with the randomly selected tiles (class: face down) using a for loop to iterate over the arrays and pop them into a new array containing all 50 cards (each card has a match).
 
-Show all cards briefly on load (toggle class face up with a timeout of less than a second).
+This sets up the board.
 
-Flip tiles back over to begin.
+When the board is ready and the page loads, show all cards briefly on load (toggle class face up with a timeout of less than a second) so player can preview matches.
+
+Flip tiles back over to begin - use a nifty animation.
 
 When the player clicks a tile, flip tile over with an animation and toggle the class to face up; do a second time with your second click.
 
@@ -26,3 +28,5 @@ If tiles match, remove from board (add display: none class); if they do not matc
 Continue on until all cards are selected.
 
 If player takes too long in between choices, wiggle matches or make glow.
+
+If I get all this working, tie difficulty levels to the card sets - faster animations/less preview time and no wiggles for the medium level; and the rgb level is legendary.
