@@ -2,6 +2,17 @@ console.log("...loaded");
 
 $(document).ready(function() {
 
+  $('.pick-deck1').click(function() {
+    $(this).toggleClass('pick-marvel');
+  });
+
+  $('.pick-deck2').click(function() {
+    $(this).toggleClass('pick-owls');
+  });
+
+  $('.pick-deck3').click(function() {
+    $(this).toggleClass('pick-rgb');
+  });
 
 
 var owls1 = [
@@ -59,11 +70,11 @@ var heroes1 = [
   <img src="http://images-cdn.moviepilot.com/images/c_fill,h_1099,w_727/t_mp_quality/edajbulzffmvjn4jqtva/who-do-you-think-would-make-the-best-ghost-rider-442710.jpg">,
   <img src="http://www.fightersgeneration.com/np5/more/doom-mvc3.jpg">
 ]
-
-var colors1= [
-  RGBs
-]
-
+//
+// var colors1= [
+//   RGBs
+// ]
+//
 
 
 });
