@@ -134,12 +134,17 @@ concentrationGame.makeGuess1 = function(XX) {
 
 // Continue on until all cards are selected.
 
-
+// make some sort of you win big deal
 
 // If player takes too long in between choices, wiggle matches or make glow.
 
 
-
+$('.flip').click(function(){
+    $(this).find('.card').addClass('flipped').mouseleave(function(){
+        $(this).removeClass('flipped');
+    });
+    return false;
+});
 
 
 
