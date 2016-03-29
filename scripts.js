@@ -77,7 +77,50 @@ $('.card').click(function() {
   $currentCard.toggleClass("faceup");
   $currentCard.css('background-image','url( images/owls-0'+$currentCard.attr('data')+'.png)');
   console.log('click!');
+
+  var $clickedCard = $('.card faceup');
+  var clicks = $('.card').click;
+
+while ($clickedCard === $('.card faceup')) {
+// OR
+// while (clicks % 2)
+
+
+
+  // if (($currentCard.attr('data')) === ($clickedCard.attr('data')) {
+  //   $('.card').addClass('faceup');
+  // } else {
+  //   $('.card').toggleClass('facedown');
+  // };
+}
+
+// OR
+
+// function checkMatches() {
+//     // var text = ""
+//     // var i = 0;
+//     do {
+//       // look through cards and grab $('.faceup')
+//         // text += "<br>The number is " + i;
+//         // i++;
+//     }
+//     while (i < 10)
+//     document.getElementById("demo").innerHTML = text;
+// }
+
+  // var clicked = $('.faceup');
+  //   if (clicked.length == 2) {
+  //     if (clicked.data === clicked.data) {
+  //       clicked.addClass('faceup');
+  //     } else {
+  //       clicked.addClass('facedown');
+  //     }
+  //   }
+
+
 });
+
+
 
 // });
 
@@ -85,28 +128,34 @@ $('.card').click(function() {
 // If tiles match, remove from board (add display: none class); if they do not match, flip both cards back over (face down class).
 //
 
-function compareCards() {
-On each click of a card,
+// is there a way to do something like:
 
-grab all cards with a class of faceup.
+// if ALL ($('.card').css('class', 'faceup') {
 
-if $($('.card').css('faceup') % 2) {
-  $('.card').addClass('faceup');
-} else {
-  ('.card').addClass('facedown');
-}
+// }
 
-check to see if modulus is 2
-
-check to see if data attributes match
-
-compare $currentCard.attr('data');
-
-
-if they do, keep face up
-if they do not, flip back over
-
-};
+// function compareCards() {
+// On each click of a card,
+//
+// grab all cards with a class of faceup.
+//
+// if $($('.card').css('faceup') % 2) {
+//   $('.card').addClass('faceup');
+// } else {
+//   ('.card').addClass('facedown');
+// }
+//
+// check to see if modulus is 2
+//
+// check to see if data attributes match
+//
+// compare $currentCard.attr('data');
+//
+//
+// if they do, keep face up
+// if they do not, flip back over
+//
+// };
 
 // THIS IS NOT WORKING AT ALL
 // function compareCards() {
