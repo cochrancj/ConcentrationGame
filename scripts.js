@@ -60,7 +60,6 @@ $(document).ready(function() {
 // ADD DATA ATTRIBUTES TO EACH IMAGE SO THOSE ATTRIBUTES CAN BE COMPARED LATER ON
 
 makeBoard =  function(){
-    // make load on click of start button
     for (var i = 0; i < owls.length; i++) {
       $('#game-board').append($('<div>'). addClass('card ' + i).css('background-image', 'url(' + owls[i] + ')'));
     };
@@ -77,6 +76,7 @@ function shuffle () {
   }
   console.log(owls)
 };
+
 shuffle();
 makeBoard();
 
@@ -89,8 +89,21 @@ makeBoard();
 //flashes front side of cards on load for a few seconds. THIS IS NOT WORKING
 function initBoard() {
 
-// $('#start').bind('click', function (e) {
-//   $('.card-').each(function (index) {
+$('#start').bind('click', function (e) {
+  $('.card').each(function (index) {
+    $(this).toggleClass('facedown')
+          .delay(index * 200)
+          .fadeOut(1500);
+  });
+  e.preventDefault();
+});
+};
+
+// initBoard();
+
+
+// $('#start').click(function (e) {
+//   $('.card').each(function (index) {
 //     $(this).toggleClass('facedown')
 //           .delay(index * 200)
 //           .fadeOut(1500);
@@ -98,34 +111,33 @@ function initBoard() {
 //   e.preventDefault();
 // });
 
-$('#start').click(function (e) {
-  $('.card-').each(function (index) {
-    $(this).toggleClass('facedown')
-          .delay(index * 200)
-          .fadeOut(1500);
-  });
-  e.preventDefault();
-});
 
-};
 
 // When the player clicks a tile, flip tile over with an animation and toggle the class to face up; do a second time with your second click.
 
 // sets up click handler on cards
-$('.card-').on('click', function() {
+// $('.card').on('click', function() {
+//   var $currentCard = $(this);
+//   $currentCard.toggleClass("facedown");
+// });
+
+// function flipCards() {
+
+$('.card').click(function() {
   var $currentCard = $(this);
   $currentCard.toggleClass("facedown");
 });
 
+// });
 
 // COMPARE CARDS ON CLICK OF CARD
 // If tiles match, remove from board (add display: none class); if they do not match, flip both cards back over (face down class).
 
-function makeGuess1(XX) {
-  if  ($('.card-').data === $('.card-').data) {
-    $('.card-').css('display', 'none');
+function makeGuess1() {
+  if  ($('.card').data === $('.card').data) {
+    $('.card').css('display', 'none');
   } else {
-    $('.card-').addClass('faceup') //XXXXXNEED SOMETHING FOR MATCHESXXX).toggleClass('facedown');
+    $('.card').addClass('faceup');
   }
 }
 
