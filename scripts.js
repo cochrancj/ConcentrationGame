@@ -61,7 +61,7 @@ $(document).ready(function() {
 
 makeBoard =  function(){
     for (var i = 0; i < owls.length; i++) {
-      $('#game-board').append($('<div>'). addClass('card ' + i).css('background-image', 'url(' + owls[i] + ')'));
+      $('#game-board').append($('<div>'). addClass('card ' + 'faceup ' + i).css('background-image', 'url(' + owls[i] + ')'));
     };
   };
 
