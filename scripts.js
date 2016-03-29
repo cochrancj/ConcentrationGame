@@ -30,13 +30,13 @@ $(document).ready(function() {
 //THIS MAKES A DIV FOR EACH CARD AND POPULATES WITH AN IMAGE FROM THE ARRAY. IT ALSO SETS A TIMEOUT ON THE LOAD FLASH AND SETS ALL IMAGES TO FACEDOWN TO CONTINUE
 makeBoard =  function(){
     for (var i = 0; i < owls.length; i++) {
-      $('#game-board').append($('<div>').addClass('card ' + 'faceup ').attr('data',owls[i].data).css('background-image', 'url(' + owls[i].src + ')'));
+      $('#game-board').append($('<div>').addClass('card ' + 'temp-faceup ').attr('data',owls[i].data).css('background-image', 'url(' + owls[i].src + ')'));
     };
 
 // When the board is ready and the page loads, show all cards briefly on load (toggle class face up with a timeout of less than a second) so player can preview matches.
 // Flip tiles back over to begin - use a nifty animation.
     window.setTimeout(function() {
-      $('.card').toggleClass('faceup');
+      $('.card').toggleClass('temp-faceup');
       $('.card').addClass('facedown');
       $('.card').css('background-image','url(images/card-facedown-2.jpg)');
     },2000);
@@ -69,53 +69,37 @@ initBoard();
 // When the player clicks a tile, flip tile over with an animation and toggle the class to face up; do a second time with your second click.
 
 
-// function flipCards() {
-
-$('.card').click(function() {
+$('.facedown').click(function() {
   var $currentCard = $(this);
   $currentCard.toggleClass("facedown");
-  $currentCard.toggleClass("faceup");
+  $currentCard.toggleClass("temp-faceup");
   $currentCard.css('background-image','url( images/owls-0'+$currentCard.attr('data')+'.png)');
-  console.log('click!');
 
-  var $clickedCard = $('.card faceup');
-  var clicks = $('.card').click;
+  // console.log('click!');
 
-while ($clickedCard === $('.card faceup')) {
-// OR
-// while (clicks % 2)
+  // COMPARE CARDS ON CLICK OF CARD
+  // If tiles match, keep perisistently up; if they do not match, flip both cards back over (face down class).
+  //
 
 
+  var $flippedCards = $('.temp-faceup');
 
-  // if (($currentCard.attr('data')) === ($clickedCard.attr('data')) {
-  //   $('.card').addClass('faceup');
-  // } else {
-  //   $('.card').toggleClass('facedown');
-  // };
-}
+  if ($flippedCards.length === 2) {
+    // console.log("match");
+    var owlData1 = $flippedCards.eq(0).attr('data');
+    var owlData2 = $flippedCards.eq(1).attr('data');
 
-// OR
+    if (owlData1 === owlData2) {
+      $flippedCards.addClass('faceup').removeClass('temp-faceup').off();
+    } else {
+      $flippedCards.addClass('facedown').removeClass('temp-faceup').css('background-image','url(images/card-facedown-2.jpg)');
+      // setTimeout(function () {
+      //
+      // }, 2000);//THIS IS NOT WORKING
+    }
+  }
 
-// function checkMatches() {
-//     // var text = ""
-//     // var i = 0;
-//     do {
-//       // look through cards and grab $('.faceup')
-//         // text += "<br>The number is " + i;
-//         // i++;
-//     }
-//     while (i < 10)
-//     document.getElementById("demo").innerHTML = text;
-// }
 
-  // var clicked = $('.faceup');
-  //   if (clicked.length == 2) {
-  //     if (clicked.data === clicked.data) {
-  //       clicked.addClass('faceup');
-  //     } else {
-  //       clicked.addClass('facedown');
-  //     }
-  //   }
 
 
 });
@@ -124,57 +108,37 @@ while ($clickedCard === $('.card faceup')) {
 
 // });
 
-// COMPARE CARDS ON CLICK OF CARD
-// If tiles match, remove from board (add display: none class); if they do not match, flip both cards back over (face down class).
-//
 
-// is there a way to do something like:
 
-// if ALL ($('.card').css('class', 'faceup') {
+$('.card').click(function() {
 
-// }
-
-// function compareCards() {
-// On each click of a card,
-//
-// grab all cards with a class of faceup.
-//
-// if $($('.card').css('faceup') % 2) {
-//   $('.card').addClass('faceup');
-// } else {
-//   ('.card').addClass('facedown');
-// }
-//
-// check to see if modulus is 2
-//
-// check to see if data attributes match
-//
-// compare $currentCard.attr('data');
-//
-//
-// if they do, keep face up
-// if they do not, flip back over
-//
-// };
-
-// THIS IS NOT WORKING AT ALL
-// function compareCards() {
-//   if ($('.card').class('faceup') && $('.card').attr ===) {
-//     $('.card').css('display', 'none');
-//   } else {
-//     $('.card').toggleClass('faceup');
-//   }
-
-//   if  ($('.card').data === $('.card').data) {
-//     $('.card').css('display', 'none');
-//   } else {
-//     $('.card').addClass('faceup');
-//   }
-// }
-
-// compareCards();
+    $('#click-count').html(function(i, val) { return val*1+1 });
+});
 
 });
+
+//NO CONSOLE ERRORS; DOES NOT SHOW UP
+var countdown;
+var countdownNumber;
+
+	function countdown_init() {
+		countdownNumber = 0;
+		countdown_trigger();
+	}
+
+	function countdown_trigger() {
+		if(countdownNumber > 0) {
+			countdownNumber++;
+			$('#timer').innerHTML = countdownNumber;
+			if(countdownNumber > 0) {
+				countdown = setTimeout('countdown_trigger()', 1000);
+			}
+		}
+	}
+
+	// function countdown_clear() {
+	// 	clearTimeout(countdown);
+	// }
 
 // Continue on until all cards are selected.
 
@@ -213,11 +177,7 @@ function inActive(){
 // Check for mousemove, could add other events here such as checking for key presses ect.
 $(document).bind('mousemove', function(){resetActive()});
 
-// Add click counter and timer
 
-// concentrationGame.clickCounter = function() {
-//   ('#game-board').click().text();
-// };
 
 // If I get all this working, tie difficulty levels to the card sets - faster animations/less preview time and no wiggles for the medium level; and the rgb level is legendary.
 
