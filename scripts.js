@@ -139,6 +139,8 @@ $('.card').click(function() {
 //     $("#timer").innerHTML = d.toLocaleTimeString();
 // };
 
+
+
 //DOCUMENT ON LOAD ENDER
 });
 
