@@ -5,13 +5,22 @@
 body {
   background-color: paleturquoise;
   font-family: 'Cuprum', sans-serif;
-  text-align: center;
+  /*text-align: center;*/
 }
 
 #container {
   width: 80%;
   height: 80%;
   margin: 0 auto;
+}
+
+.game-container {
+  display: flex;
+  justify-content: center;
+}
+
+h1 {
+
 }
 
 .card {
@@ -29,16 +38,12 @@ body {
 
 #game-board {
   border: 3px solid grey;
-  /*display: -webkit-flex;
-  display: flex;
-  justify-content: center;*/
   float: left;
   width: 70%;
   height: 80%;
 }
 
 #game-score {
-  /*border: 3px solid grey;*/
   width: 20%;
   margin-left: 20px;
   float: right;
@@ -55,13 +60,6 @@ body {
   background-color: snow;
 }
 
-
-
-/*button {
-  margin-left: 20px;
-  margin-right: 10px;
-  margin-bottom: 30px;
-}*/
 
 /* RE JIGGER WIGGLE TO DO MORE */
 .wiggle {
@@ -86,7 +84,7 @@ body {
 }
 
 
-.pick-deck1 {
+/*.pick-deck1 {
   width: 100px;
   height: 100px;
   background-color: darkviolet;
@@ -98,11 +96,10 @@ body {
 .pick-deck2 {
   width: 100px;
   height: 100px;
-  /*background-color: darkviolet;*/
   border: 3px solid grey;
   background-repeat:no-repeat;
   background-size:contain;
-}
+}*/
 
 /*.pick-deck3 {
   width: 100px;
@@ -113,13 +110,13 @@ body {
   background-size:contain;
 }*/*/
 
-.pick-marvel {
+/*.pick-marvel {
   background-image: url("/images/Marvel.png");
 }
 
 .pick-owls {
   background-image: url("/images/owls-019.png");
-}
+}*/
 
 /*.pick-rgb {
   background-color: snow;
