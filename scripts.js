@@ -2,7 +2,7 @@ console.log("...loaded");
 
 var makeBoard;
 
-$(document).ready(function() {
+
 
   var owls = [
     {src: 'images/owls-01.png', data: 01},
@@ -27,11 +27,40 @@ $(document).ready(function() {
     {src: 'images/owls-010.png', data: 10}
    ]
 
+   var marvel = [
+     {src: 'images/A-logo.png', data: 01},
+     {src: 'images/Cap.png', data: 02},
+     {src: 'images/Daredevil.png', data: 03},
+     {src: 'images/Deadpool.png', data: 04},
+     {src: 'images/Hulk.png', data: 05},
+     {src: 'images/Shield.png', data: 06},
+     {src: 'images/Spiderman.png', data: 07},
+     {src: 'images/Thor.png', data: 08},
+     {src: 'images/Xmen.png', data: 09},
+     {src: 'images/Y-logo.png', data: 10},
+     {src: 'images/A-logo.png', data: 01},
+     {src: 'images/Cap.png', data: 02},
+     {src: 'images/Daredevil.png', data: 03},
+     {src: 'images/Deadpool.png', data: 04},
+     {src: 'images/Hulk.png', data: 05},
+     {src: 'images/Shield.png', data: 06},
+     {src: 'images/Spiderman.png', data: 07},
+     {src: 'images/Thor.png', data: 08},
+     {src: 'images/Xmen.png', data: 09},
+     {src: 'images/Y-logo.png', data: 10}
+    ]
+
+
+
 //THIS MAKES A DIV FOR EACH CARD AND POPULATES WITH AN IMAGE FROM THE ARRAY. IT ALSO SETS A TIMEOUT ON THE LOAD FLASH AND SETS ALL IMAGES TO FACEDOWN TO CONTINUE
-makeBoard =  function(){
-    for (var i = 0; i < owls.length; i++) {
-      $('#game-board').append($('<div>').addClass('card ' + 'temp-faceup ').attr('data',owls[i].data).css('background-image', 'url(' + owls[i].src + ')'));
+makePieces =  function(array){ //should not append
+    for (var i = 0; i < array.length; i++) {
+      $('#game-board').append($('<div>').addClass('card ' + 'temp-faceup ').attr('data',array[i].data).css('background-image', 'url(' + array[i].src + ')'));
+      bindClick()
     };
+
+
+makeBoard //RESPONSIBLE FOR APPENDING
 
 // When the board is ready and the page loads, show all cards briefly on load (toggle class face up with a timeout of less than a second) so player can preview matches.
 // Flip tiles back over to begin - use a nifty animation.
@@ -43,18 +72,42 @@ makeBoard =  function(){
   };
 
 // FISHER YATES SHUFFLE METHOD - THIS SHUFFLES THE 'CARDS'
-function shuffle () {
-  for (i = owls.length - 1; i > 0; i -= 1) {
+function shuffle(array) {
+  for (i = array.length - 1; i > 0; i -= 1) {
     var j = Math.floor(Math.random() * (i + 1))
-    var temp = owls[i]
-    owls[i] = owls[j]
-    owls[j] = temp
+    var temp = array[i]
+    array[i] = array[j]
+    array[j] = temp
   }
-  console.log(owls)
+  console.log(array)
 };
 
-shuffle();
-makeBoard();
+var arraySelection = owls;
+
+function pickDeck() {
+$('.pick-deck1').click(function() {
+ var arraySelection = marvel;
+ $("#game-board").empty();
+ shuffle(arraySelection);
+ makeBoard(arraySelection);
+ console.log($('#game-board'))
+ ;
+});
+
+$('.pick-deck2').click(function() {
+ var arraySelection = owls;
+ $("#game-board").empty();
+ shuffle(arraySelection);
+ makeBoard(arraySelection);
+ console.log($('#game-board'))
+ bindClick();
+});
+
+
+};
+
+
+
 
 
 // THIS ADDS THE BLINK
@@ -68,12 +121,35 @@ initBoard();
 
 // When the player clicks a tile, flip tile over with an animation and toggle the class to face up; do a second time with your second click.
 
+function bindClick() {
+  $('.facedown').click(function() {
+    clickLogic();
+  });
 
-$('.facedown').click(function() {
+  $('.card').click(function() {
+    $('#click-count').html(function(i, val) { return val*1+1 });
+  });
+};
+
+function clickLogic(){
+  console.log("YO");
   var $currentCard = $(this);
-  $currentCard.toggleClass("facedown");
-  $currentCard.toggleClass("temp-faceup");
-  $currentCard.css('background-image','url( images/owls-0'+$currentCard.attr('data')+'.png)');
+  var backgroundData = parseInt($(this).attr("data"));
+  console.log(array[1].data);
+  console.log( parseInt($(this).attr("data")))
+  for (var i = 0; i < array.length; i++) {
+    if( array[i].data === backgroundData){
+       $currentCard.css('background-image','url(' + array[i].src + ')');
+       console.log(array[i].src)
+    }
+  }
+  $(this).toggleClass("facedown");
+  $(this).toggleClass("temp-faceup");
+  checkState();
+}
+  //
+  // $currentCard.css('background-image','url(' + $currentCard.attr('src') + ')');
+
 
 
   // console.log('click!');
@@ -82,7 +158,7 @@ $('.facedown').click(function() {
   // If tiles match, keep perisistently up; if they do not match, flip both cards back over (face down class).
   //
 
-
+function checkState() {
   var $flippedCards = $('.temp-faceup');
 
   if ($flippedCards.length === 2) {
@@ -98,21 +174,13 @@ $('.facedown').click(function() {
     }, 700);//THIS IS NOT WORKING
     }
   }
+};
 
 
 
 
 
-});
 
-
-
-$('.card').click(function() {
-
-    $('#click-count').html(function(i, val) { return val*1+1 });
-});
-
-});
 
 //NO CONSOLE ERRORS; DOES NOT SHOW UP
 var countdown;
@@ -167,6 +235,15 @@ function winnerCheat() {
   }, 60);
 };
 
+
+$(document).ready(function() {
+  shuffle(arraySelection);
+  makeBoard(arraySelection);
+
+  // pickDeck();
+  });
+
+
 // If player takes too long in between choices, wiggle matches or make glow.
 
 // If theres no activity for 5 seconds add wiggle - RE JIGGER TO ATTACH TO MATCHES INSTEAD OF THE BOARD ITSELF AND ONLY HAPPEN IF YOU HAVE ALREDY CLICKED ONE TIME
@@ -207,15 +284,9 @@ function winnerCheat() {
 
       // (create versions of this for the three card type options I want to build - marvel heroes + villains, owls & slightly different RGB values - if these images don't work, use 8-bit food icons + rgb values + geometrical shapes or Pokemon or tarot cards) **- V2 -**
 
-  $('.pick-deck1').click(function() {
-    $(this).toggleClass('pick-marvel');
-  });
 
-  $('.pick-deck2').click(function() {
-    $(this).toggleClass('pick-owls');
-  });
 
-  $('.pick-deck3').click(function() {
-    $(this).toggleClass('pick-rgb');
-  });
+  // $('.pick-deck3').click(function() {
+  //   $(this).toggleClass('pick-rgb');
+  // });
 // ++++++++++++++++++++++++++++
