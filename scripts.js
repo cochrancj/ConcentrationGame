@@ -75,6 +75,7 @@ $('.facedown').click(function() {
   $currentCard.toggleClass("temp-faceup");
   $currentCard.css('background-image','url( images/owls-0'+$currentCard.attr('data')+'.png)');
 
+
   // console.log('click!');
 
   // COMPARE CARDS ON CLICK OF CARD
@@ -92,21 +93,20 @@ $('.facedown').click(function() {
     if (owlData1 === owlData2) {
       $flippedCards.addClass('faceup').removeClass('temp-faceup').off();
     } else {
+      setTimeout(function () {
       $flippedCards.addClass('facedown').removeClass('temp-faceup').css('background-image','url(images/card-facedown-2.jpg)');
-      // setTimeout(function () {
-      //
-      // }, 2000);//THIS IS NOT WORKING
+    }, 700);//THIS IS NOT WORKING
     }
   }
 
 
+// function(event) {
+//   event.stopImmediatePropagation();
+// }
+
 
 
 });
-
-
-
-// });
 
 
 
@@ -118,27 +118,32 @@ $('.card').click(function() {
 });
 
 //NO CONSOLE ERRORS; DOES NOT SHOW UP
-var countdown;
-var countdownNumber;
+// var countdown;
+// var countdownNumber;
+//
+// 	function countdown_init() {
+// 		countdownNumber = 0;
+// 		countdown_trigger();
+// 	}
+//
+// 	function countdown_trigger() {
+// 		if(countdownNumber > 0) {
+// 			countdownNumber++;
+// 			$('#timer').innerHTML = countdownNumber;
+// 			if(countdownNumber > 0) {
+// 				countdown = setTimeout('countdown_trigger()', 1000);
+// 			}
+// 		}
+// 	}
 
-	function countdown_init() {
-		countdownNumber = 0;
-		countdown_trigger();
-	}
+//ALSO DOES NOT WORK BUT DOES NOT RETURN ANY KIND OF THING ON PAGE
+  var myVar = setInterval(myTimer ,1000);
+function myTimer() {
+    var d = new Date();
+    $("#timer").innerHTML = d.toLocaleTimeString();
+};
 
-	function countdown_trigger() {
-		if(countdownNumber > 0) {
-			countdownNumber++;
-			$('#timer').innerHTML = countdownNumber;
-			if(countdownNumber > 0) {
-				countdown = setTimeout('countdown_trigger()', 1000);
-			}
-		}
-	}
 
-	// function countdown_clear() {
-	// 	clearTimeout(countdown);
-	// }
 
 // Continue on until all cards are selected.
 
