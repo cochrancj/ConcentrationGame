@@ -1,8 +1,6 @@
 console.log("...loaded");
 
-var makeBoard;
-
-
+  var makeBoard;
 
   var owls = [
     {src: 'images/owls-01.png', data: 01},
@@ -51,19 +49,22 @@ var makeBoard;
     ]
 
 
-
-//THIS MAKES A DIV FOR EACH CARD AND POPULATES WITH AN IMAGE FROM THE ARRAY. IT ALSO SETS A TIMEOUT ON THE LOAD FLASH AND SETS ALL IMAGES TO FACEDOWN TO CONTINUE
+//THIS MAKES A DIV FOR EACH CARD AND POPULATES WITH AN IMAGE FROM THE ARRAY.
 makePieces =  function(array){ //should not append
     for (var i = 0; i < array.length; i++) {
-      $('#game-board').append($('<div>').addClass('card ' + 'temp-faceup ').attr('data',array[i].data).css('background-image', 'url(' + array[i].src + ')'));
-      bindClick()
+      $('#game-pieces').append($('<div>').addClass('card ' + 'temp-faceup ').attr('data',array[i].data).css('background-image', 'url(' + array[i].src + ')'));
+      // bindClick()
     };
 
+//THIS APPENDS THE BOARD DIV TO THE DOM
+function makeBoard(){ //RESPONSIBLE FOR APPENDING
+ $('#game-board').append('#game-pieces');
 
-makeBoard //RESPONSIBLE FOR APPENDING
+};
 
-// When the board is ready and the page loads, show all cards briefly on load (toggle class face up with a timeout of less than a second) so player can preview matches.
-// Flip tiles back over to begin - use a nifty animation.
+// When the board is ready and the page loads, show all cards briefly on load so player can preview matches.
+
+// Flip tiles back over to begin
     window.setTimeout(function() {
       $('.card').toggleClass('temp-faceup');
       $('.card').addClass('facedown');
@@ -79,7 +80,7 @@ function shuffle(array) {
     array[i] = array[j]
     array[j] = temp
   }
-  console.log(array)
+  // console.log(array)
 };
 
 var arraySelection = owls;
@@ -90,7 +91,7 @@ $('.pick-deck1').click(function() {
  $("#game-board").empty();
  shuffle(arraySelection);
  makeBoard(arraySelection);
- console.log($('#game-board'))
+ // console.log($('#game-board'))
  ;
 });
 
@@ -99,7 +100,7 @@ $('.pick-deck2').click(function() {
  $("#game-board").empty();
  shuffle(arraySelection);
  makeBoard(arraySelection);
- console.log($('#game-board'))
+ // console.log($('#game-board'))
  bindClick();
 });
 
@@ -280,13 +281,4 @@ $(document).ready(function() {
 // If I get all this working, tie difficulty levels to the card sets - faster animations/less preview time and no wiggles for the medium level; and the rgb level is legendary.
 
 
-// Build a 'pick your cards' function. **- V2 -**
-
-      // (create versions of this for the three card type options I want to build - marvel heroes + villains, owls & slightly different RGB values - if these images don't work, use 8-bit food icons + rgb values + geometrical shapes or Pokemon or tarot cards) **- V2 -**
-
-
-
-  // $('.pick-deck3').click(function() {
-  //   $(this).toggleClass('pick-rgb');
-  // });
 // ++++++++++++++++++++++++++++
