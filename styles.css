@@ -70,12 +70,23 @@ body {
   transform: rotateZ(-30deg);
 }
 
-.active {
+.winner {
+  z-index: 2;
+  background-color: hotpink;
+}
 
+#cheat {
+  background-image: url("images/lightswitch_rave.gif");
+  position: absolute;
+  width: 300px;
+  height: 300px;
+  top: 50%;
+  z-index: 4;
+  display: none;
 }
 
 
-/*.pick-deck1 {
+.pick-deck1 {
   width: 100px;
   height: 100px;
   background-color: darkviolet;
@@ -87,29 +98,29 @@ body {
 .pick-deck2 {
   width: 100px;
   height: 100px;
-  background-color: darkviolet;
+  /*background-color: darkviolet;*/
   border: 3px solid grey;
   background-repeat:no-repeat;
   background-size:contain;
 }
 
-.pick-deck3 {
+/*.pick-deck3 {
   width: 100px;
   height: 100px;
-  background-color: darkviolet;
-  border: 3px solid grey;
+  /*background-color: darkviolet;*/
+  /*border: 3px solid grey;
   background-repeat:no-repeat;
   background-size:contain;
-}*/
+}*/*/
 
-/*.pick-marvel {
-  background-image: url("https://cdn2.hubspot.net/hub/75217/file-357892423-jpg/images/marvel-avengers-logo.jpg");
+.pick-marvel {
+  background-image: url("/images/Marvel.png");
 }
 
 .pick-owls {
-  background-image: url("https://s-media-cache-ak0.pinimg.com/736x/c0/32/38/c03238eb743c9ae69e9ee46186bb0a9c.jpg");
+  background-image: url("/images/owls-019.png");
 }
 
-.pick-rgb {
+/*.pick-rgb {
   background-color: snow;
 }*/

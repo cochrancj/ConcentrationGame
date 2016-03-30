@@ -100,9 +100,6 @@ $('.facedown').click(function() {
   }
 
 
-// function(event) {
-//   event.stopImmediatePropagation();
-// }
 
 
 
@@ -118,30 +115,30 @@ $('.card').click(function() {
 });
 
 //NO CONSOLE ERRORS; DOES NOT SHOW UP
-// var countdown;
-// var countdownNumber;
-//
-// 	function countdown_init() {
-// 		countdownNumber = 0;
-// 		countdown_trigger();
-// 	}
-//
-// 	function countdown_trigger() {
-// 		if(countdownNumber > 0) {
-// 			countdownNumber++;
-// 			$('#timer').innerHTML = countdownNumber;
-// 			if(countdownNumber > 0) {
-// 				countdown = setTimeout('countdown_trigger()', 1000);
-// 			}
-// 		}
-// 	}
+var countdown;
+var countdownNumber;
+
+	function countdown_init() {
+		countdownNumber = 0;
+		countdown_trigger();
+	}
+
+	function countdown_trigger() {
+		if(countdownNumber > 0) {
+			countdownNumber++;
+			$('#timer').innerHTML = countdownNumber;
+			if(countdownNumber > 0) {
+				countdown = setTimeout('countdown_trigger()', 1000);
+			}
+		}
+	}
 
 //ALSO DOES NOT WORK BUT DOES NOT RETURN ANY KIND OF THING ON PAGE
-  var myVar = setInterval(myTimer ,1000);
-function myTimer() {
-    var d = new Date();
-    $("#timer").innerHTML = d.toLocaleTimeString();
-};
+//   var myVar = setInterval(myTimer ,1000);
+// function myTimer() {
+//     var d = new Date();
+//     $("#timer").innerHTML = d.toLocaleTimeString();
+// };
 
 
 
@@ -149,38 +146,57 @@ function myTimer() {
 
 // make some sort of you win big deal
 
+// NOT WORKING BUT NO ERRORS
+function youWin() {
+  if (($('.temp-faceup') === 0) && ($('.facedown') === 0)) {
+    $('body').addClass('winner');
+  }
+};
 
+function winnerCheat() {
+  var $cheat = $('#cheat');
+  var distance = 1200;
+
+  setInterval(function() {
+    $cheat.css('left', distance + 'px');
+    if (distance < -300) {
+      distance = 1200;
+    } else {
+      distance -= 5;
+    }
+  }, 60);
+};
 
 // If player takes too long in between choices, wiggle matches or make glow.
 
 // If theres no activity for 5 seconds add wiggle - RE JIGGER TO ATTACH TO MATCHES INSTEAD OF THE BOARD ITSELF AND ONLY HAPPEN IF YOU HAVE ALREDY CLICKED ONE TIME
 
-var activityTimeout = setTimeout(inActive, 5000);
-
-function resetActive(){
-    $('#game-board').attr('class', 'active');
-    clearTimeout(activityTimeout);
-    activityTimeout = setTimeout(inActive, 5000);
-}
+// var activityTimeout = setTimeout(inActive, 5000);
+//
+// function resetActive(){
+//     $('#game-board').attr('class', 'active');
+//     clearTimeout(activityTimeout);
+//     activityTimeout = setTimeout(inActive, 5000);
+// }
 
 // No activity do something.
 // function inActive(){
 //     $('#game-board').attr('class', 'wiggle');
 // }
 
-function inActive(){
-    var wiggle = function(gameboard) {
-  $('#game-board')
-    .animate({'left':(-10)+'px'},200)
-    .animate({'left':(+20)+'px'},200)
-    .animate({'left':(-10)+'px'},200);
- };
-// this version of wiggle is not working
-     wiggle('#game-board');
-};
-
-// Check for mousemove, could add other events here such as checking for key presses ect.
-$(document).bind('mousemove', function(){resetActive()});
+// function inActive(){
+//     var wiggle = function(gameboard) {
+//   $('#game-board')
+//     .animate({'left':(-10)+'px'},200)
+//     .animate({'left':(+20)+'px'},200)
+//     .animate({'left':(-10)+'px'},200);
+//  };
+// // this version of wiggle is not working
+//      wiggle('#game-board');
+// };
+//
+// // Check for mousemove, could add other events here such as checking for key presses ect.
+// $(document).bind('mousemove', function(){resetActive()});
 
 
 
@@ -191,15 +207,15 @@ $(document).bind('mousemove', function(){resetActive()});
 
       // (create versions of this for the three card type options I want to build - marvel heroes + villains, owls & slightly different RGB values - if these images don't work, use 8-bit food icons + rgb values + geometrical shapes or Pokemon or tarot cards) **- V2 -**
 
-  // $('.pick-deck1').click(function() {
-  //   $(this).toggleClass('pick-marvel');
-  // });
-  //
-  // $('.pick-deck2').click(function() {
-  //   $(this).toggleClass('pick-owls');
-  // });
-  //
-  // $('.pick-deck3').click(function() {
-  //   $(this).toggleClass('pick-rgb');
-  // });
+  $('.pick-deck1').click(function() {
+    $(this).toggleClass('pick-marvel');
+  });
+
+  $('.pick-deck2').click(function() {
+    $(this).toggleClass('pick-owls');
+  });
+
+  $('.pick-deck3').click(function() {
+    $(this).toggleClass('pick-rgb');
+  });
 // ++++++++++++++++++++++++++++
