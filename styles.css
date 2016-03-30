@@ -56,28 +56,32 @@ body {
   background-color: snow;
 }
 
-
-/* RE JIGGER WIGGLE TO DO MORE */
-.wiggle {
-  -webkit-transform: rotateZ(-30deg);
-  -ms-transform: rotateZ(-30deg);
-  transform: rotateZ(-30deg);
-}
-
 .winner {
-  z-index: 2;
-  background-color: hotpink;
-}
-
-#cheat {
   background-image: url("images/lightswitch_rave.gif");
   position: absolute;
-  width: 300px;
+  background-size: cover;
+  /*width: 300px;
   height: 300px;
-  top: 50%;
+  top: 50%;*/
   z-index: 4;
   display: none;
 }
+
+a {
+  text-decoration: none;
+  color: white;
+  float: right;
+}
+
+
+/* RE JIGGER WIGGLE TO DO MORE */
+/*.wiggle {
+  -webkit-transform: rotateZ(-30deg);
+  -ms-transform: rotateZ(-30deg);
+  transform: rotateZ(-30deg);
+}*/
+
+
 
 
 

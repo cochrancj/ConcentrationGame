@@ -97,7 +97,10 @@ $('.facedown').click(function() {
       };
     };
 // this is the end of this huge function
+youWin();
 });
+
+
 
 // This counts each click of the cards and adds to the counter
 $('.card').click(function() {
@@ -128,13 +131,13 @@ $('.card').click(function() {
 // 	};
 
 //ALSO DOES NOT WORK BUT DOES NOT RETURN ANY KIND OF THING ON PAGE
-  var myVar = setInterval(myTimer ,1000);
-
-  function myTimer() {
-
-    var d = new Date();
-    $("#timer").innerHTML = d.toLocaleTimeString();
-};
+//   var myVar = setInterval(myTimer ,1000);
+//
+//   function myTimer() {
+//
+//     var d = new Date();
+//     $("#timer").innerHTML = d.toLocaleTimeString();
+// };
 
 //DOCUMENT ON LOAD ENDER
 });
@@ -142,45 +145,38 @@ $('.card').click(function() {
 
 // Continue on until all cards are selected.
 // make some sort of you win big deal
-// NOT WORKING BUT NO ERRORS
-// this is supposed to check if all cards are faceup, and if they are, add the winner class. The winner class contains the Cheat + music - the Cheat gif is supposed to carom around the screen and the music is supposed to play.
+
+// checks if all cards are faceup, and if they are, adds the winner class. The winner class contains the Cheat + music - the Cheat gif is supposed to carom around the screen and the music is supposed to play. (V2)
 
 function youWin() {
-  if (($('.temp-faceup') === 0) && ($('.facedown') === 0)) {
+  if (($('.temp-faceup').length === 0) && ($('.facedown').length === 0)) {
     $('body').addClass('winner');
+    document.getElementById('sound').play();
   }
-  console.log("YOU WIN");
 };
 
-function winnerCheat() {
-  var $cheat = $('#cheat');
-  var distance = 1200;
-
-  setInterval(function() {
-    $cheat.css('left', distance + 'px');
-    if (distance < -300) {
-      distance = 1200;
-    } else {
-      distance -= 5;
-    }
-  }, 60);
-};
-winnerCheat();
-
-// $("#toggleMusic").click(function() {
-//    var audio = document.getElementsByTagName('audio')[0];
+// This is for a future refactor when I make The Cheat dance.
+// function winnerCheat() {
+//   var $cheat = $('.winner');
+//   var distance = 1200;
 //
-// $('.winner').toggle(0, function() {
-//    if($('.winner').is(':visible')) {
-//       audio.play();
-//    } else {
-//       audio.pause();
-//    }
-// });
+//   setInterval(function() {
+//     $cheat.css('left', distance + 'px');
+//     if (distance < -300) {
+//       distance = 1200;
+//     } else {
+//       distance -= 5;
+//     }
+//   }, 60);
+// };
+// winnerCheat();
+
 
 // If player takes too long in between choices, wiggle matches or make glow.
 
-// If theres no activity for 5 seconds add wiggle - RE JIGGER TO ATTACH TO MATCHES INSTEAD OF THE BOARD ITSELF AND ONLY HAPPEN IF YOU HAVE ALREDY CLICKED ONE TIME
+// If theres no activity for 5 seconds add wiggle - RE JIGGER TO ATTACH TO MATCHES INSTEAD OF THE BOARD ITSELF AND ONLY HAPPEN IF YOU HAVE ALREDY CLICKED ONE TIME.
+// this worked at one time but quit suddenly and seemingly for no reason
+
 
 // var activityTimeout = setTimeout(inActive, 5000);
 //
@@ -210,23 +206,4 @@ winnerCheat();
 // $(document).bind('mousemove', function(){resetActive()});
 
 
-
-// If I get all this working, tie difficulty levels to the card sets - faster animations/less preview time and no wiggles for the medium level; and the rgb level is legendary.
-
-
-// Build a 'pick your cards' function. **- V2 -**
-
-      // (create versions of this for the three card type options I want to build - marvel heroes + villains, owls & slightly different RGB values - if these images don't work, use 8-bit food icons + rgb values + geometrical shapes or Pokemon or tarot cards) **- V2 -**
-
-  // $('.pick-deck1').click(function() {
-  //   $(this).toggleClass('pick-marvel');
-  // });
-  //
-  // $('.pick-deck2').click(function() {
-  //   $(this).toggleClass('pick-owls');
-  // });
-  //
-  // $('.pick-deck3').click(function() {
-  //   $(this).toggleClass('pick-rgb');
-  // });
-// ++++++++++++++++++++++++++++
+// Build a 'pick your cards' function. SEE FAILED CODE REFACTOR  **- V2 -**
