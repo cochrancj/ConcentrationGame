@@ -35,6 +35,8 @@ body {
   float: left;
   width: 70%;
   height: 80%;
+  position:relative;
+  z-index: 0;
 }
 
 #game-score {
@@ -89,10 +91,11 @@ body {
 .pick-deck1 {
   width: 100px;
   height: 100px;
-  background-color: darkviolet;
+  /*background-color: darkviolet; */
+  background-color: #F0F0F0;  
   border: 3px solid grey;
-  background-repeat:no-repeat;
-  background-size:contain;
+  background-repeat:no-repeat; 
+  background-size:contain; 
 }
 
 .pick-deck2 {
@@ -111,16 +114,33 @@ body {
   /*border: 3px solid grey;
   background-repeat:no-repeat;
   background-size:contain;
-}*/*/
+}*/
 
 .pick-marvel {
-  background-image: url("/images/Marvel.png");
+ /* width: 100px;
+  height: 100px; */
+  background-image: url("images/Marvel.png"); 
 }
 
 .pick-owls {
-  background-image: url("/images/owls-019.png");
+  background-image: url("images/owls-019.png");
 }
 
 /*.pick-rgb {
   background-color: snow;
 }*/
+
+.deckChosen {
+	background-color: #F0F0F0;
+	opacity: 0.4;
+}
+
+#playAgain {
+  width: 100px;
+  height: 100px;
+  background-color: green;  
+  border: 3px solid grey;
+  font-size: 32px;
+  margin-left: auto;
+  margin-right: auto;
+}
