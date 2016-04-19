@@ -1,7 +1,11 @@
-console.log("...loaded");
+// console.log("...loaded");
 
-  var makeBoard;
+var makeBoard;
 
+// this needs to be refactored to hold only the items that *have* to be completed once the page loads. The refactor is h-a-r-d because my code is a hot mess of brute force and duct tape.
+$(document).ready(function() {
+
+// holds all my image face options with data pieces attached so they can be easily compared later down the road
   var owls = [
     {src: 'images/owls-01.png', data: 01},
     {src: 'images/owls-02.png', data: 02},
@@ -25,46 +29,14 @@ console.log("...loaded");
     {src: 'images/owls-010.png', data: 10}
    ]
 
-   var marvel = [
-     {src: 'images/A-logo.png', data: 01},
-     {src: 'images/Cap.png', data: 02},
-     {src: 'images/Daredevil.png', data: 03},
-     {src: 'images/Deadpool.png', data: 04},
-     {src: 'images/Hulk.png', data: 05},
-     {src: 'images/Shield.png', data: 06},
-     {src: 'images/Spiderman.png', data: 07},
-     {src: 'images/Thor.png', data: 08},
-     {src: 'images/Xmen.png', data: 09},
-     {src: 'images/Y-logo.png', data: 10},
-     {src: 'images/A-logo.png', data: 01},
-     {src: 'images/Cap.png', data: 02},
-     {src: 'images/Daredevil.png', data: 03},
-     {src: 'images/Deadpool.png', data: 04},
-     {src: 'images/Hulk.png', data: 05},
-     {src: 'images/Shield.png', data: 06},
-     {src: 'images/Spiderman.png', data: 07},
-     {src: 'images/Thor.png', data: 08},
-     {src: 'images/Xmen.png', data: 09},
-     {src: 'images/Y-logo.png', data: 10}
-    ]
-
-
-//THIS MAKES A DIV FOR EACH CARD AND POPULATES WITH AN IMAGE FROM THE ARRAY.
-makePieces =  function(array){ //should not append
-    for (var i = 0; i < array.length; i++) {
-      $('#game-pieces').append($('<div>').addClass('card ' + 'temp-faceup ').attr('data',array[i].data).css('background-image', 'url(' + array[i].src + ')'));
-      // bindClick()
+//THIS MAKES A DIV FOR EACH CARD AND POPULATES WITH AN IMAGE FROM THE ARRAY. IT ALSO SETS A TIMEOUT ON THE LOAD FLASH AND SETS ALL IMAGES TO FACEDOWN TO CONTINUE. this code should be refactored to only do one thing.
+makeBoard =  function(){
+    for (var i = 0; i < owls.length; i++) {
+      $('#game-board').append($('<div>').addClass('card ' + 'temp-faceup ').attr('data',owls[i].data).css('background-image', 'url(' + owls[i].src + ')'));
     };
 
-//THIS APPENDS THE BOARD DIV TO THE DOM
-function makeBoard(){ //RESPONSIBLE FOR APPENDING
- $('#game-board').append('#game-pieces');
-
-};
-
-// When the board is ready and the page loads, show all cards briefly on load so player can preview matches.
-
-// Flip tiles back over to begin
+// When the board is ready and the page loads, show all cards briefly on load (toggle class face up with a timeout of less than a second) so player can preview matches.
+// Flip tiles back over to begin - use a nifty animation. ANIMATION IS NOT HAPPENING SINCE I CHOSE TO CREATE THINGS THE HARD WAY - I HAVE A SIMPLE ANIMATION TO USE, BUT MY BRAIN IS FRIED WHEN IT COMES TO INTEGRATING IT INTO MY CODE.
     window.setTimeout(function() {
       $('.card').toggleClass('temp-faceup');
       $('.card').addClass('facedown');
@@ -72,182 +44,141 @@ function makeBoard(){ //RESPONSIBLE FOR APPENDING
     },2000);
   };
 
-// FISHER YATES SHUFFLE METHOD - THIS SHUFFLES THE 'CARDS'
-function shuffle(array) {
-  for (i = array.length - 1; i > 0; i -= 1) {
+// FISHER YATES SHUFFLE METHOD - THIS SHUFFLES THE 'CARDS', and totally works! win!
+function shuffle() {
+  for (i = owls.length - 1; i > 0; i -= 1) {
     var j = Math.floor(Math.random() * (i + 1))
-    var temp = array[i]
-    array[i] = array[j]
-    array[j] = temp
+    var temp = owls[i]
+    owls[i] = owls[j]
+    owls[j] = temp
   }
-  // console.log(array)
+  // console.log(owls)
 };
 
-var arraySelection = owls;
-
-function pickDeck() {
-$('.pick-deck1').click(function() {
- var arraySelection = marvel;
- $("#game-board").empty();
- shuffle(arraySelection);
- makeBoard(arraySelection);
- // console.log($('#game-board'))
- ;
-});
-
-$('.pick-deck2').click(function() {
- var arraySelection = owls;
- $("#game-board").empty();
- shuffle(arraySelection);
- makeBoard(arraySelection);
- // console.log($('#game-board'))
- bindClick();
-});
+// calls the shuffle, populates the board with shuffled cards
+shuffle();
+makeBoard();
 
 
-};
-
-
-
-
-
-// THIS ADDS THE BLINK
+// THIS ADDS THE BLINK ON CARD LOAD
 function initBoard() {
-
   $('.card').delay(100).fadeOut('slow').fadeIn('slow').toggleClass('facedown');
 };
-
 initBoard();
 
 
-// When the player clicks a tile, flip tile over with an animation and toggle the class to face up; do a second time with your second click.
+// When the player clicks a tile, flip tile over with an animation and toggle the class to face up; do a second time with your second click. This needs to be refactored because it is doing waaay too many things. Also: adding deck #2 is a bitch when the cards are created this way. Doable (see failed refactor), but a bitch.
 
-function bindClick() {
-  $('.facedown').click(function() {
-    clickLogic();
-  });
+$('.facedown').click(function() {
 
-  $('.card').click(function() {
-    $('#click-count').html(function(i, val) { return val*1+1 });
-  });
-};
-
-function clickLogic(){
-  console.log("YO");
   var $currentCard = $(this);
-  var backgroundData = parseInt($(this).attr("data"));
-  console.log(array[1].data);
-  console.log( parseInt($(this).attr("data")))
-  for (var i = 0; i < array.length; i++) {
-    if( array[i].data === backgroundData){
-       $currentCard.css('background-image','url(' + array[i].src + ')');
-       console.log(array[i].src)
-    }
-  }
-  $(this).toggleClass("facedown");
-  $(this).toggleClass("temp-faceup");
-  checkState();
-}
-  //
-  // $currentCard.css('background-image','url(' + $currentCard.attr('src') + ')');
 
-
+    $currentCard.toggleClass("facedown");
+    $currentCard.toggleClass("temp-faceup");
+    $currentCard.css('background-image','url( images/owls-0'+$currentCard.attr('data')+'.png)');
 
   // console.log('click!');
 
   // COMPARE CARDS ON CLICK OF CARD
   // If tiles match, keep perisistently up; if they do not match, flip both cards back over (face down class).
-  //
-
-function checkState() {
   var $flippedCards = $('.temp-faceup');
 
-  if ($flippedCards.length === 2) {
-    // console.log("match");
-    var owlData1 = $flippedCards.eq(0).attr('data');
-    var owlData2 = $flippedCards.eq(1).attr('data');
+    if ($flippedCards.length === 2) {
+      // console.log("match");
+      var owlData1 = $flippedCards.eq(0).attr('data');
+      var owlData2 = $flippedCards.eq(1).attr('data');
 
-    if (owlData1 === owlData2) {
-      $flippedCards.addClass('faceup').removeClass('temp-faceup').off();
-    } else {
-      setTimeout(function () {
-      $flippedCards.addClass('facedown').removeClass('temp-faceup').css('background-image','url(images/card-facedown-2.jpg)');
-    }, 700);//THIS IS NOT WORKING
-    }
-  }
-};
-
-
-
-
+        if (owlData1 === owlData2) {
+          $flippedCards.addClass('faceup').removeClass('temp-faceup').off();
+        } else {
+          setTimeout(function () {
+          $flippedCards.addClass('facedown').removeClass('temp-faceup').css('background-image','url(images/card-facedown-2.jpg)');
+        }, 700);
+      };
+    };
+// this is the end of this huge function
+youWin();
+});
 
 
 
+// This counts each click of the cards and adds to the counter
+$('.card').click(function() {
+    $('#click-count').html(function(i, val) { return val*1+1 });
+});
+
+// THIS IS WHERE MY DOCUMENT ON LOAD ENDS
+// });
+
+// This is supposed to be the timer that shows how long you've been playing
 //NO CONSOLE ERRORS; DOES NOT SHOW UP
-var countdown;
-var countdownNumber;
-
-	function countdown_init() {
-		countdownNumber = 0;
-		countdown_trigger();
-	}
-
-	function countdown_trigger() {
-		if(countdownNumber > 0) {
-			countdownNumber++;
-			$('#timer').innerHTML = countdownNumber;
-			if(countdownNumber > 0) {
-				countdown = setTimeout('countdown_trigger()', 1000);
-			}
-		}
-	}
+// var countdown;
+// var countdownNumber;
+//
+// 	function countdownInit() {
+// 		countdownNumber = 0;
+// 		countdownTrigger();
+// 	};
+//
+// 	function countdownTrigger() {
+// 		if(countdownNumber > 1) {
+// 			countdownNumber++;
+// 			$('#timer').innerHTML = countdownNumber;
+// 			if(countdownNumber > 1) {
+// 				countdown = setTimeout('countdownTrigger()', 1000);
+// 			}
+// 		};
+// 	};
 
 //ALSO DOES NOT WORK BUT DOES NOT RETURN ANY KIND OF THING ON PAGE
 //   var myVar = setInterval(myTimer ,1000);
-// function myTimer() {
+//
+//   function myTimer() {
+//
 //     var d = new Date();
 //     $("#timer").innerHTML = d.toLocaleTimeString();
 // };
 
 
 
-// Continue on until all cards are selected.
+//DOCUMENT ON LOAD ENDER
+});
 
+
+// Continue on until all cards are selected.
 // make some sort of you win big deal
 
-// NOT WORKING BUT NO ERRORS
+// checks if all cards are faceup, and if they are, adds the winner class. The winner class contains the Cheat + music - the Cheat gif is supposed to carom around the screen and the music is supposed to play. (V2)
+
 function youWin() {
-  if (($('.temp-faceup') === 0) && ($('.facedown') === 0)) {
+  if (($('.temp-faceup').length === 0) && ($('.facedown').length === 0)) {
     $('body').addClass('winner');
+    document.getElementById('sound').play();
   }
 };
 
-function winnerCheat() {
-  var $cheat = $('#cheat');
-  var distance = 1200;
-
-  setInterval(function() {
-    $cheat.css('left', distance + 'px');
-    if (distance < -300) {
-      distance = 1200;
-    } else {
-      distance -= 5;
-    }
-  }, 60);
-};
-
-
-$(document).ready(function() {
-  shuffle(arraySelection);
-  makeBoard(arraySelection);
-
-  // pickDeck();
-  });
+// This is for a future refactor when I make The Cheat dance.
+// function winnerCheat() {
+//   var $cheat = $('.winner');
+//   var distance = 1200;
+//
+//   setInterval(function() {
+//     $cheat.css('left', distance + 'px');
+//     if (distance < -300) {
+//       distance = 1200;
+//     } else {
+//       distance -= 5;
+//     }
+//   }, 60);
+// };
+// winnerCheat();
 
 
 // If player takes too long in between choices, wiggle matches or make glow.
 
-// If theres no activity for 5 seconds add wiggle - RE JIGGER TO ATTACH TO MATCHES INSTEAD OF THE BOARD ITSELF AND ONLY HAPPEN IF YOU HAVE ALREDY CLICKED ONE TIME
+// If theres no activity for 5 seconds add wiggle - RE JIGGER TO ATTACH TO MATCHES INSTEAD OF THE BOARD ITSELF AND ONLY HAPPEN IF YOU HAVE ALREDY CLICKED ONE TIME.
+// this worked at one time but quit suddenly and seemingly for no reason
+
 
 // var activityTimeout = setTimeout(inActive, 5000);
 //
@@ -277,8 +208,4 @@ $(document).ready(function() {
 // $(document).bind('mousemove', function(){resetActive()});
 
 
-
-// If I get all this working, tie difficulty levels to the card sets - faster animations/less preview time and no wiggles for the medium level; and the rgb level is legendary.
-
-
-// ++++++++++++++++++++++++++++
+// Build a 'pick your cards' function. SEE FAILED CODE REFACTOR  **- V2 -**

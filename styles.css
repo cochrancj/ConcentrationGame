@@ -5,13 +5,18 @@
 body {
   background-color: paleturquoise;
   font-family: 'Cuprum', sans-serif;
-  text-align: center;
 }
 
 #container {
   width: 80%;
   height: 80%;
-  margin: 0 auto;
+  margin: 5% auto;
+}
+
+.game-container {
+  display: flex;
+  justify-content: center;
+  text-align: center;
 }
 
 .card {
@@ -29,20 +34,16 @@ body {
 
 #game-board {
   border: 3px solid grey;
-  /*display: -webkit-flex;
-  display: flex;
-  justify-content: center;*/
   float: left;
   width: 70%;
   height: 80%;
 }
 
 #game-score {
-  /*border: 3px solid grey;*/
   width: 20%;
-  margin-left: 20px;
+  margin-left: 10%;
   float: right;
-  height: 80%;
+  height: 100%;
 }
 
 .facedown {
@@ -55,55 +56,51 @@ body {
   background-color: snow;
 }
 
-
-
-/*button {
-  margin-left: 20px;
-  margin-right: 10px;
-  margin-bottom: 30px;
-}*/
-
-/* RE JIGGER WIGGLE TO DO MORE */
-.wiggle {
-  -webkit-transform: rotateZ(-30deg);
-  -ms-transform: rotateZ(-30deg);
-  transform: rotateZ(-30deg);
-}
-
 .winner {
-  z-index: 2;
-  background-color: hotpink;
-}
-
-#cheat {
   background-image: url("images/lightswitch_rave.gif");
   position: absolute;
-  width: 300px;
+  background-size: cover;
+  /*width: 300px;
   height: 300px;
-  top: 50%;
+  top: 50%;*/
   z-index: 4;
   display: none;
 }
 
-table {
-  margin: 0 auto;
+a {
+  text-decoration: none;
+  color: white;
+  float: right;
 }
 
-.pick-deck1 {
-  width: 50px;
-  height: 50px;
+
+/* RE JIGGER WIGGLE TO DO MORE */
+/*.wiggle {
+  -webkit-transform: rotateZ(-30deg);
+  -ms-transform: rotateZ(-30deg);
+  transform: rotateZ(-30deg);
+}*/
+
+
+
+
+
+
+/*.pick-deck1 {
+  width: 100px;
+  height: 100px;
+  background-color: darkviolet;
   border: 3px solid grey;
   background-repeat:no-repeat;
-  background-size:cover;
+  background-size:contain;
 }
-
 .pick-deck2 {
-  width: 50px;
-  height: 50px;
+  width: 100px;
+  height: 100px;
   border: 3px solid grey;
   background-repeat:no-repeat;
-  background-size:cover;
-}
+  background-size:contain;
+}*/
 
 /*.pick-deck3 {
   width: 100px;
@@ -112,15 +109,14 @@ table {
   /*border: 3px solid grey;
   background-repeat:no-repeat;
   background-size:contain;
-}*/*/
+}*/
 
-.pick-marvel {
-  background-image: url("images/Marvel.png");
+/*.pick-marvel {
+  background-image: url("/images/Marvel.png");
 }
-
 .pick-owls {
-  background-image: url("images/owls-019.png");
-}
+  background-image: url("/images/owls-019.png");
+}*/
 
 /*.pick-rgb {
   background-color: snow;
